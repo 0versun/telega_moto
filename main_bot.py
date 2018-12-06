@@ -4,6 +4,7 @@ import weather_retreaver
 import arrow
 import schedule
 import time
+import thread_runner
 from datetime import datetime
 
 config = yaml.load(open('credentials.yaml'))
