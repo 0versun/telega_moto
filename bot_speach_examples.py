@@ -1,5 +1,7 @@
 import random
 import timing_processor
+import weather_retreaver
+import string
 # import weather_retreaver
 
 
@@ -110,6 +112,8 @@ def weather_wind_speed_processor(wind_power):
                   'дует так что всем ховаццо нахер',
                   'наваливает так что походу нам всем пиздец',
                   'говорит что нам таки пиздец']
+    wind_power = int(wind_power)
+    print('RECEIVE',wind_power)
 
     if wind_power in range(0, 2):
         return conditions[0]
@@ -117,7 +121,7 @@ def weather_wind_speed_processor(wind_power):
         return conditions[1]
     elif wind_power in range(6, 11):
         return conditions[2]
-    elif wind_power in range(12, 19):
+    elif wind_power in range(12, 20):
         return conditions[3]
     elif wind_power in range(20, 28):
         return conditions[4]
@@ -134,17 +138,18 @@ def weather_wind_speed_processor(wind_power):
     elif wind_power in range(89, 103):
         return conditions[10]
     else:
+        print('RECEIVE',wind_power)
+
         return conditions[11]
 
 def weather_string_generator():
 
-    weather_text_report = f'Эй {welcome_word_processor()} до начала сезона осталось {timing_processor.return_dif(2019,4,4) } дней \n\
-    Погода в Киеве примерно -6 {weather_conditions_processor(-3)} и ебошит снег \
-    Ветер {weather_wind_speed_processor(100)} 15 км\ч. \
-    Если бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {-16} \
-    Солнце встало в 14:30 но вы конечно же проебали этот момент, как всегда впрочем \
-    хоть закат в 16Ж00 не проебите у \
-    Для более точного прогноза обратитесь там к своему личному метеорологу на вашем \
+    weather_text_report = f'Эй {welcome_word_processor()}, до начала сезона осталось {timing_processor.return_dif(2019,4,4) } дней.\
+    \nПогода в Киеве примерно {int(weather_retreaver.system.bot_retreave_current_temperature())} {weather_conditions_processor(weather_retreaver.system.bot_retreave_current_temperature())} и {str.lower(weather_retreaver.system.bot_retreave_current_condition())}а еще может быть а может и не быть {str.lower(weather_retreaver.system.bot_retreave_maybe_conditions()) } \
+    \nВетер {weather_wind_speed_processor(weather_retreaver.system.bot_retreave_current_wind_speed())}, вроде бы как {int(weather_retreaver.system.bot_retreave_current_wind_speed())} км\ч. \
+    \nЕсли бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {int(weather_retreaver.system.bot_retreave_current_feels_like_temperature()) } \
+    \nСолнце встало в {weather_retreaver.system.bot_retreave_sunrise() } но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в {weather_retreaver.system.bot_retreave_sunset()} не проебите \
+    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем \
     любимом айфончике или как вы это привыкли делат \
     И еще если бы мы поехали сегодня в Лебедевку в {19:00} то было бы уже \
     пиздец темно и {weather_conditions_processor(-5)} и взошла луна но мы бы ее не увидели потому что ебошит снег \
