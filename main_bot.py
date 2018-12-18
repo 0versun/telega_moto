@@ -5,6 +5,7 @@ import arrow
 import schedule
 import time
 import thread_runner
+import bot_speach_examples
 from datetime import datetime
 
 config = yaml.load(open('credentials.yaml'))
@@ -27,9 +28,10 @@ def send_welcome(message):
 
 @bot.message_handler()
 def handle_text(message):
-    answer = str(weather_retreaver.weather_current_retreaver())
+    # answer = str(weather_retreaver.weather_current_retreaver())
+    answer = bot_speach_examples.weather_string_generator()
 
-    if message.text == "pogoda":
+    if str.lower(message.text) == "pogoda":
         # print('triggered')
         console_output(message, answer)
         bot.reply_to(message, answer)

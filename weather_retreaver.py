@@ -72,6 +72,10 @@ class weather_formatter:
         print(self.load_current_weather()["current"]["wind_kph"])
         return self.load_current_weather()["current"]["wind_kph"]
     
+    def bot_retreave_current_humidity(self):
+        print(self.load_current_weather()["current"]["humidity"])
+        return self.load_current_weather()["current"]["humidity"]        
+    
     def bot_retreave_current_feels_like_temperature(self):
         print(self.load_current_weather()["current"]["feelslike_c"])
         return self.load_current_weather()["current"]["feelslike_c"]
@@ -87,6 +91,15 @@ class weather_formatter:
     def bot_retreave_maybe_conditions(self):
         print(self.load_forecast()['forecast']['forecastday'][0]['day']['condition']['text'])
         return self.load_forecast()['forecast']['forecastday'][0]['day']['condition']['text']    
+
+    def bot_min_temperature_retreaver(self):
+        print(self.load_forecast()['forecast']['forecastday'][0]['day']['mintemp_c'])
+        return self.load_forecast()['forecast']['forecastday'][0]['day']['mintemp_c']
+    
+    def bot_retreave_moonrise(self):
+        print(self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise'])
+        return self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise']
+
 
 system = weather_formatter()
 system.update_weather_data = 'Start'

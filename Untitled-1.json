@@ -1,0 +1,120 @@
+{
+    "location": {
+        "name": "Kiev",
+        "region": "Kyyivs'ka Oblast'",
+        "country": "Ukraine",
+        "lat": 50.43,
+        "lon": 30.52,
+        "tz_id": "Europe/Kiev",
+        "localtime_epoch": 1544975872,
+        "localtime": "2018-12-16 17:57"
+    },
+    "current": {
+        "last_updated_epoch": 1544975116,
+        "last_updated": "2018-12-16 17:45",
+        "temp_c": -4.0,
+        "temp_f": 24.8,
+        "is_day": 0,
+        "condition": {
+            "text": "Пасмурно",
+            "icon": "//cdn.apixu.com/weather/64x64/night/122.png",
+            "code": 1009
+        },
+        "wind_mph": 13.6,
+        "wind_kph": 22.0,
+        "wind_degree": 120,
+        "wind_dir": "ESE",
+        "pressure_mb": 1030.0,
+        "pressure_in": 30.9,
+        "precip_mm": 0.1,
+        "precip_in": 0.0,
+        "humidity": 93,
+        "cloud": 100,
+        "feelslike_c": -10.6,
+        "feelslike_f": 12.9,
+        "vis_km": 6.0,
+        "vis_miles": 3.0,
+        "uv": 1.0
+    },
+
+
+
+
+    
+    "forecast": {
+        "forecastday": [
+            {
+                "date": "2018-12-16",
+                "date_epoch": 1544918400,
+                "day": {
+                    "maxtemp_c": -3.3,
+                    "maxtemp_f": 26.1,
+                    "mintemp_c": -14.3,
+                    "mintemp_f": 6.3,
+                    "avgtemp_c": -7.6,
+                    "avgtemp_f": 18.3,
+                    "maxwind_mph": 11.6,
+                    "maxwind_kph": 18.7,
+                    "totalprecip_mm": 0.4,
+                    "totalprecip_in": 0.02,
+                    "avgvis_km": 16.4,
+                    "avgvis_miles": 10.0,
+                    "avghumidity": 94.0,
+                    "condition": {
+                        "text": "Небольшой снег",
+                        "icon": "//cdn.apixu.com/weather/64x64/day/326.png",
+                        "code": 1213
+                    },
+                    "uv": 0.7
+                },
+                "astro": {
+                    "sunrise": "07:53 AM",
+                    "sunset": "03:54 PM",
+                    "moonrise": "12:57 PM",
+                    "moonset": "No moonset"
+                }
+            }
+        ]
+    }
+}
+
+
+{
+    "location": {
+        "name": "Kiev",
+        "region": "Kyyivs'ka Oblast'",
+        "country": "Ukraine",
+        "lat": 50.43,
+        "lon": 30.52,
+        "tz_id": "Europe/Kiev",
+        "localtime_epoch": 1544975872,
+        "localtime": "2018-12-16 17:57"
+    },
+    "current": {
+        "last_updated_epoch": 1544975116,
+        "last_updated": "2018-12-16 17:45",
+        "temp_c": -4.0,
+        "temp_f": 24.8,
+        "is_day": 0,
+        "condition": {
+            "text": "Пасмурно",
+            "icon": "//cdn.apixu.com/weather/64x64/night/122.png",
+            "code": 1009
+        },
+        "wind_mph": 13.6,
+        "wind_kph": 22.0,
+        "wind_degree": 120,
+        "wind_dir": "ESE",
+        "pressure_mb": 1030.0,
+        "pressure_in": 30.9,
+        "precip_mm": 0.1,
+        "precip_in": 0.0,
+        "humidity": 93,
+        "cloud": 100,
+        "feelslike_c": -10.6,
+        "feelslike_f": 12.9,
+        "vis_km": 6.0,
+        "vis_miles": 3.0,
+        "uv": 1.0
+    }
+}
