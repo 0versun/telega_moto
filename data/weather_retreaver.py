@@ -1,9 +1,9 @@
 import json
 import yaml
 import requests
-import arrow
 
-weather_params = yaml.load(open('credentials.yaml'))
+
+weather_params = yaml.load(open('./data/settings/credentials.yaml'))
 
 
 def weather_url_constructor(params):

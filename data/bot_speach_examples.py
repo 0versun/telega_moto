@@ -1,8 +1,6 @@
 import random
-import timing_processor
-import weather_retreaver
-import string
-# import weather_retreaver
+from data import timing_processor
+from data import weather_retreaver
 
 
 def weather_conditions_processor(temperature):
@@ -152,7 +150,7 @@ def weather_string_generator():
     \nЕсли бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {int(weather_retreaver.system.bot_retreave_current_feels_like_temperature()) } \
     \nСолнце встало в {weather_retreaver.system.bot_retreave_sunrise() } но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в {weather_retreaver.system.bot_retreave_sunset()} не проебите \
     \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем \
-    любимом айфончике или как вы это привыкли делат \
+    любимом телефончике или как вы это привыкли делать \
     \nИ еще если бы мы поехали сегодня в Лебедевку в {19:00} то было бы {weather_retreaver.system.bot_min_temperature_retreaver()} \
     \nчто есть {weather_conditions_processor(int(weather_retreaver.system.bot_min_temperature_retreaver()))} а так же возможно {str.lower(weather_retreaver.system.bot_retreave_maybe_conditions())} и луна взошла бы в {weather_retreaver.system.bot_retreave_moonrise() }\
     \n{end_word_processor()} но вы держитесь'

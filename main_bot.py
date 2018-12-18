@@ -1,14 +1,9 @@
 import telebot
 import yaml
-import weather_retreaver
-import arrow
-import schedule
-import time
-import thread_runner
-import bot_speach_examples
+from data import bot_speach_examples
 from datetime import datetime
 
-config = yaml.load(open('credentials.yaml'))
+config = yaml.load(open('./data/settings/credentials.yaml'))
 bot_token = config['token']
 
 bot = telebot.TeleBot(bot_token)
