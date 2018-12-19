@@ -7,7 +7,9 @@ def joba():
     print('106258322', 'OPAAAAAAAAAAAAAAAAAAAAAAAAA')
     # schedule.every().day.at('17:00').do(bot.send_message(message.chat.id, 'NEUJELI'))
 
+
 schedule.every(1).minutes.do(joba)
+
 
 def run_over():
     while True:
@@ -16,6 +18,7 @@ def run_over():
         # is pending to run or not
         schedule.run_pending()
         time.sleep(1)
+
 
 try:
     _thread.start_new_thread(run_over, ())
