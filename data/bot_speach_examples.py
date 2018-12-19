@@ -1,7 +1,7 @@
 import random
 from data import timing_processor
-from data import weather_retreaver
-
+from data import thread_runner
+from data import thread_runner
 
 def weather_conditions_processor(temperature):
 
@@ -118,15 +118,15 @@ def weather_wind_speed_processor(wind_power):
 def weather_string_generator():
 
     weather_text_report = f'Эй {welcome_word_processor()}, до начала сезона осталось {timing_processor.return_dif(2019,4,4) } дней.\
-    \nПогода в Киеве примерно {int(weather_retreaver.system.bot_retreave_current_temperature())} {weather_conditions_processor(weather_retreaver.system.bot_retreave_current_temperature())} и {str.lower(weather_retreaver.system.bot_retreave_current_condition())} а еще может быть и еще будет {str.lower(weather_retreaver.system.bot_retreave_maybe_conditions()) } \
-    \nВетер {weather_wind_speed_processor(weather_retreaver.system.bot_retreave_current_wind_speed())}, вроде бы как {int(weather_retreaver.system.bot_retreave_current_wind_speed())} км\ч. \
-    \nВлажность где-то {weather_retreaver.system.bot_retreave_current_humidity()}\
-    \nЕсли бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {int(weather_retreaver.system.bot_retreave_current_feels_like_temperature()) } \
-    \nСолнце встало в {weather_retreaver.system.bot_retreave_sunrise() } но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в {weather_retreaver.system.bot_retreave_sunset()} не проебите \
+    \nПогода в Киеве примерно {int(thread_runner.system.bot_retreave_current_temperature())} {weather_conditions_processor(thread_runner.system.bot_retreave_current_temperature())} и {str.lower(thread_runner.system.bot_retreave_current_condition())} а еще может быть и еще будет {str.lower(thread_runner.system.bot_retreave_maybe_conditions()) } \
+    \nВетер {weather_wind_speed_processor(thread_runner.system.bot_retreave_current_wind_speed())}, вроде бы как {int(thread_runner.system.bot_retreave_current_wind_speed())} км\ч. \
+    \nВлажность где-то {thread_runner.system.bot_retreave_current_humidity()}\
+    \nЕсли бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {int(thread_runner.system.bot_retreave_current_feels_like_temperature()) } \
+    \nСолнце встало в {thread_runner.system.bot_retreave_sunrise() } но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в {thread_runner.system.bot_retreave_sunset()} не проебите \
     \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем \
     любимом телефончике или как вы это привыкли делать \
-    \nИ еще если бы мы поехали сегодня в Лебедевку в {19:00} то было бы {weather_retreaver.system.bot_min_temperature_retreaver()} \
-    \nчто есть {weather_conditions_processor(int(weather_retreaver.system.bot_min_temperature_retreaver()))} а так же возможно {str.lower(weather_retreaver.system.bot_retreave_maybe_conditions())} и луна взошла бы в {weather_retreaver.system.bot_retreave_moonrise() }\
+    \nИ еще если бы мы поехали сегодня в Лебедевку в {19:00} то было бы {thread_runner.system.bot_min_temperature_retreaver()} \
+    \nчто есть {weather_conditions_processor(int(thread_runner.system.bot_min_temperature_retreaver()))} а так же возможно {str.lower(thread_runner.system.bot_retreave_maybe_conditions())} и луна взошла бы в {thread_runner.system.bot_retreave_moonrise() }\
     \n{end_word_processor()} но вы держитесь'
 
     print(weather_text_report)

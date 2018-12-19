@@ -101,5 +101,5 @@ class weather_formatter:
         return self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise']
 
 
-system = weather_formatter()
-system.update_weather_data = 'Start'
+# system = weather_formatter()
+# system.update_weather_data = 'Start'
