@@ -1,7 +1,8 @@
 import random
+# import yaml
 from data import timing_processor
 from data import thread_runner
-from data import thread_runner
+from data import data_processor
 
 
 def weather_conditions_processor(temperature):
@@ -141,7 +142,7 @@ def weather_string_generator():
 
     cyborg_hello = welcome_bot()
     welcome = welcome_word_processor()
-    seazon_start = timing_processor.return_dif(2019, 4, 4)
+    seazon_start = timing_processor.return_dif(data_processor.data_read('seazon_start_yaer'), data_processor.data_read('seazon_start_mounth'), data_processor.data_read('seazon_start_day'))
     current_temp = int(thread_runner.system.bot_retreave_current_temperature())
     condition = weather_conditions_processor(
         thread_runner.system.bot_retreave_current_temperature())
@@ -164,12 +165,13 @@ def weather_string_generator():
     future_weather = str.lower(
         thread_runner.system.bot_retreave_maybe_conditions())
     moon = thread_runner.system.bot_retreave_moonrise()
-    destination_time = '19:00'
-    destination = 'Лебедевку'
+    destination_time = data_processor.data_read('destination_time')
+    destination = data_processor.data_read('destination')
+    seazon = data_processor.data_read('seazon_reason')
     advice = prognoz_advise()
 
     weather_text_report = \
-    f'<b>{cyborg_hello} - {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
+    f'<b>{cyborg_hello} - {welcome}, до начала {seazon} осталось {seazon_start} дней.</b>\
     \n \
     \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition}. \
     \n \
@@ -181,7 +183,7 @@ def weather_string_generator():
     \n \
     \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите! \
     \n\
-    \nИ еще если бы мы поехали сегодня в {destination} в <code>{destination_time}</code> то было бы {future_temp} градусов, что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в <code>{moon}</code>.\
+    \nИ еще если бы мы поехали сегодня в <b>{destination}</b> в <code>{destination_time}</code> то было бы {future_temp} градусов, что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в <code>{moon}</code>.\
     \n\
     \nДля более точного прогноза, {advice} или как вы там привыкли это делать? \
     \n\

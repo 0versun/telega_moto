@@ -27,15 +27,12 @@ def send_welcome(message):
 
 @bot.message_handler()
 def handle_text(message):
-    # answer = str(weather_retreaver.weather_current_retreaver())
     answer = bot_speach_examples.weather_string_generator()
 
     if str.lower(message.text) == "pogoda":
-        # print('triggered')
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
     elif str.lower(message.text) == "kek dela":
-        # print('triggered2')
         answer = 'TRIGGEREEEDDDD'
         console_output(message, answer)
         bot.reply_to(message, answer)
