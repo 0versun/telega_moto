@@ -1,9 +1,9 @@
 import json
 import yaml
 import requests
-import arrow
 
-weather_params = yaml.load(open('credentials.yaml'))
+
+weather_params = yaml.load(open('./data/settings/credentials.yaml'))
 
 
 def weather_url_constructor(params):
@@ -16,13 +16,13 @@ def weather_url_constructor(params):
 
 
 def weather_current_retreaver(url=weather_url_constructor(weather_params['weather_now_prefix'])):
-    print('RETREAVER for current weather called')
+    print('WARNING - RETREAVER for current weather called')
     weather_json_response = requests.get(url)
     return weather_json_response.text
 
 
 def weather_forecast_retreaver(url=weather_url_constructor(weather_params['wether_forecast'])):
-    print('RETREAVER for all day weather called')
+    print('WARNING - RETREAVER for all day weather called')
     weather_json_response = requests.get(url)
     return weather_json_response.text
 
@@ -100,6 +100,3 @@ class weather_formatter:
         print(self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise'])
         return self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise']
 
-
-system = weather_formatter()
-system.update_weather_data = 'Start'
