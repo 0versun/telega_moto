@@ -33,7 +33,7 @@ def handle_text(message):
     if str.lower(message.text) == "pogoda":
         # print('triggered')
         console_output(message, answer)
-        bot.reply_to(message, answer)
+        bot.reply_to(message, answer, parse_mode='HTML')
     elif str.lower(message.text) == "kek dela":
         # print('triggered2')
         answer = 'TRIGGEREEEDDDD'

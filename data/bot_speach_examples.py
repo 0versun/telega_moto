@@ -3,13 +3,14 @@ from data import timing_processor
 from data import thread_runner
 from data import thread_runner
 
+
 def weather_conditions_processor(temperature):
 
     conditions = (
         'жара ну прям пиздец', 'жарко так в паряде', 'вполне себе тепло',
         'норм в принципе, но уже, холодновато', 'холодно сцуко',
         'холодно так впоряде', 'холодно шопиздец', 'холодно так шо уши вянут',
-        'это уже и не холодно даже а смерть от обморожения',
+        'это уже и не холодно даже, а смерть от обморожения',
         'температура непонятно, можно жить или нет, походу как на марсе')
 
     if temperature in range(30, 41):
@@ -116,22 +117,47 @@ def weather_wind_speed_processor(wind_power):
 
 
 def weather_string_generator():
-
-    weather_text_report = f'Эй {welcome_word_processor()}, до начала сезона осталось {timing_processor.return_dif(2019,4,4) } дней.\
-    \nПогода в Киеве примерно {int(thread_runner.system.bot_retreave_current_temperature())} {weather_conditions_processor(thread_runner.system.bot_retreave_current_temperature())} и {str.lower(thread_runner.system.bot_retreave_current_condition())} а еще может быть и еще будет {str.lower(thread_runner.system.bot_retreave_maybe_conditions()) } \
-    \nВетер {weather_wind_speed_processor(thread_runner.system.bot_retreave_current_wind_speed())}, вроде бы как {int(thread_runner.system.bot_retreave_current_wind_speed())} км\ч. \
-    \nВлажность где-то {thread_runner.system.bot_retreave_current_humidity()}\
-    \nЕсли бы мото братюня ехал {moto_equip_generator()} то ощущал бы это примерно как {int(thread_runner.system.bot_retreave_current_feels_like_temperature()) } \
-    \nСолнце встало в {thread_runner.system.bot_retreave_sunrise() } но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в {thread_runner.system.bot_retreave_sunset()} не проебите \
-    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем \
-    любимом телефончике или как вы это привыкли делать \
-    \nИ еще если бы мы поехали сегодня в Лебедевку в {19:00} то было бы {thread_runner.system.bot_min_temperature_retreaver()} \
-    \nчто есть {weather_conditions_processor(int(thread_runner.system.bot_min_temperature_retreaver()))} а так же возможно {str.lower(thread_runner.system.bot_retreave_maybe_conditions())} и луна взошла бы в {thread_runner.system.bot_retreave_moonrise() }\
-    \n{end_word_processor()} но вы держитесь'
+    welcome = welcome_word_processor()
+    seazon_start = timing_processor.return_dif(2019,4,4)
+    current_temp = int(thread_runner.system.bot_retreave_current_temperature())
+    condition = weather_conditions_processor(thread_runner.system.bot_retreave_current_temperature())
+    condition2 = str.lower(thread_runner.system.bot_retreave_current_condition())
+    feature_condition = str.lower(thread_runner.system.bot_retreave_maybe_conditions()) 
+    wind = weather_wind_speed_processor(thread_runner.system.bot_retreave_current_wind_speed())
+    wind_speed = int(thread_runner.system.bot_retreave_current_wind_speed())
+    humidity = thread_runner.system.bot_retreave_current_humidity()
+    equip = moto_equip_generator()
+    moto_feel = int(thread_runner.system.bot_retreave_current_feels_like_temperature())
+    sun_s = thread_runner.system.bot_retreave_sunrise()
+    sun_e = thread_runner.system.bot_retreave_sunset()
+    future_temp = int(thread_runner.system.bot_min_temperature_retreaver())
+    future_condition = weather_conditions_processor(int(thread_runner.system.bot_min_temperature_retreaver()))
+    future_weather = str.lower(thread_runner.system.bot_retreave_maybe_conditions())
+    moon = thread_runner.system.bot_retreave_moonrise()
+    destination_time = '19:00'
+    destination = 'Лебедевку'
+    weather_text_report = \
+    f'<b>Эй {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
+    \n \
+    \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition} \
+    \n \
+    \nВетер - {wind}, вроде бы как {wind_speed} км\ч.\
+    \n \
+    \nВлажность где-то {humidity}%\
+    \n \
+    \nЕсли бы мото братюня ехал {equip} то ощущал бы это примерно как {moto_feel} градусов. \
+    \n \
+    \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите \
+    \n\
+    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем любимом телефончике или как вы это привыкли делать \
+    \n \
+    \nИ еще если бы мы поехали сегодня в {destination} в {destination_time} то было бы {future_temp} что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в {moon }\
+    \n\
+    \n<b>{end_word_processor()}, но вы держитесь</b>'
 
     print(weather_text_report)
     return weather_text_report
     # return
 
 
-weather_string_generator()
+# weather_string_generator()
