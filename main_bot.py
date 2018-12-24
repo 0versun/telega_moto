@@ -27,9 +27,9 @@ def send_welcome(message):
 
 @bot.message_handler()
 def handle_text(message):
-    answer = bot_speach_examples.weather_string_generator()
 
     if str.lower(message.text) == "pogoda":
+        answer = bot_speach_examples.weather_string_generator()
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
     elif str.lower(message.text) == "kek dela":

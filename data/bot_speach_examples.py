@@ -189,9 +189,4 @@ def weather_string_generator():
     \n\
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
-    print(weather_text_report)
     return weather_text_report
-    # return
-
-
-# weather_string_generator()
