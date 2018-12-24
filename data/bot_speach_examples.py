@@ -39,7 +39,7 @@ def welcome_bot():
 
     word_list = [
         'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Как там', 'Опа',
-        'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете','Отакое','Ку'
+        'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете', 'Отакое', 'Ку'
     ]
 
     return random.choice(word_list)
@@ -126,7 +126,19 @@ def weather_wind_speed_processor(wind_power):
         return conditions[11]
 
 
+def prognoz_advise():
+    word_list = [
+        'обратитесь там к своему личному метеорологу на вашем любимом айфончике',
+        'обратитесь там к своему личному метеорологу на вашем любимом андроиде',
+        'спрыгните с 30 этажа', 'погуглите гисметео', 'посмотрите в окно',
+        'позвоните в метеослужбу', 'послушайте радио', 'втыкните в телек',
+        'оближите палец и поднимите его выше головы', 'посмотрите на градусник'
+    ]
+    return random.choice(word_list)
+
+
 def weather_string_generator():
+
     cyborg_hello = welcome_bot()
     welcome = welcome_word_processor()
     seazon_start = timing_processor.return_dif(2019, 4, 4)
@@ -154,23 +166,24 @@ def weather_string_generator():
     moon = thread_runner.system.bot_retreave_moonrise()
     destination_time = '19:00'
     destination = 'Лебедевку'
+    advice = prognoz_advise()
 
     weather_text_report = \
-    f'<b>{cyborg_hello} {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
+    f'<b>{cyborg_hello} - {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
     \n \
-    \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition} \
+    \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition}. \
     \n \
     \nВетер - {wind}, вроде бы как {wind_speed} км\ч.\
     \n \
     \nВлажность где-то {humidity}%.\
     \n \
-    \nЕсли бы мото братюня ехал {equip} то ощущал бы это примерно как {moto_feel} градусов. \
+    \nЕсли бы мото братюня ехал {equip}, то ощущал бы это примерно как {moto_feel} градусов. \
     \n \
-    \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите \
+    \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите! \
     \n\
-    \nИ еще если бы мы поехали сегодня в {destination} в {destination_time} то было бы {future_temp} что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в {moon }\
+    \nИ еще если бы мы поехали сегодня в {destination} в <code>{destination_time}</code> то было бы {future_temp} градусов, что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в <code>{moon}</code>.\
     \n\
-    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем любимом телефончике или как вы это привыкли делать \
+    \nДля более точного прогноза, {advice} или как вы там привыкли это делать? \
     \n\
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
