@@ -35,6 +35,16 @@ def weather_conditions_processor(temperature):
         return conditions[9]
 
 
+def welcome_bot():
+
+    word_list = [
+        'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Как там', 'Опа',
+        'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете','Отакое','Ку'
+    ]
+
+    return random.choice(word_list)
+
+
 def welcome_word_processor():
 
     word_list = [
@@ -117,43 +127,52 @@ def weather_wind_speed_processor(wind_power):
 
 
 def weather_string_generator():
+    cyborg_hello = welcome_bot()
     welcome = welcome_word_processor()
-    seazon_start = timing_processor.return_dif(2019,4,4)
+    seazon_start = timing_processor.return_dif(2019, 4, 4)
     current_temp = int(thread_runner.system.bot_retreave_current_temperature())
-    condition = weather_conditions_processor(thread_runner.system.bot_retreave_current_temperature())
-    condition2 = str.lower(thread_runner.system.bot_retreave_current_condition())
-    feature_condition = str.lower(thread_runner.system.bot_retreave_maybe_conditions()) 
-    wind = weather_wind_speed_processor(thread_runner.system.bot_retreave_current_wind_speed())
+    condition = weather_conditions_processor(
+        thread_runner.system.bot_retreave_current_temperature())
+    condition2 = str.lower(
+        thread_runner.system.bot_retreave_current_condition())
+    feature_condition = str.lower(
+        thread_runner.system.bot_retreave_maybe_conditions())
+    wind = weather_wind_speed_processor(
+        thread_runner.system.bot_retreave_current_wind_speed())
     wind_speed = int(thread_runner.system.bot_retreave_current_wind_speed())
     humidity = thread_runner.system.bot_retreave_current_humidity()
     equip = moto_equip_generator()
-    moto_feel = int(thread_runner.system.bot_retreave_current_feels_like_temperature())
+    moto_feel = int(
+        thread_runner.system.bot_retreave_current_feels_like_temperature())
     sun_s = thread_runner.system.bot_retreave_sunrise()
     sun_e = thread_runner.system.bot_retreave_sunset()
     future_temp = int(thread_runner.system.bot_min_temperature_retreaver())
-    future_condition = weather_conditions_processor(int(thread_runner.system.bot_min_temperature_retreaver()))
-    future_weather = str.lower(thread_runner.system.bot_retreave_maybe_conditions())
+    future_condition = weather_conditions_processor(
+        int(thread_runner.system.bot_min_temperature_retreaver()))
+    future_weather = str.lower(
+        thread_runner.system.bot_retreave_maybe_conditions())
     moon = thread_runner.system.bot_retreave_moonrise()
     destination_time = '19:00'
     destination = 'Лебедевку'
+
     weather_text_report = \
-    f'<b>Эй {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
+    f'<b>{cyborg_hello} {welcome}, до начала сезона осталось {seazon_start} дней.</b>\
     \n \
     \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition} \
     \n \
     \nВетер - {wind}, вроде бы как {wind_speed} км\ч.\
     \n \
-    \nВлажность где-то {humidity}%\
+    \nВлажность где-то {humidity}%.\
     \n \
     \nЕсли бы мото братюня ехал {equip} то ощущал бы это примерно как {moto_feel} градусов. \
     \n \
     \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите \
     \n\
-    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем любимом телефончике или как вы это привыкли делать \
-    \n \
     \nИ еще если бы мы поехали сегодня в {destination} в {destination_time} то было бы {future_temp} что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в {moon }\
     \n\
-    \n<b>{end_word_processor()}, но вы держитесь</b>'
+    \nДля более точного прогноза обратитесь там к своему личному метеорологу на вашем любимом телефончике или как вы это привыкли делать \
+    \n\
+    \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
     print(weather_text_report)
     return weather_text_report
