@@ -22,7 +22,7 @@ def console_output(message, answer):
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing?")
+    bot.reply_to(message, "Все путем мототело, используй слова 'бот прием' и 'бот куда едем' чтоб получить актуальную инфу по сабжу, жмякать старт каждый раз, не обязательно , а то жмякалка поломается.")
 
 
 @bot.message_handler(commands=['set_destination'])
