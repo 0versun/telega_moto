@@ -79,7 +79,7 @@ def set_task(message):
 @bot.message_handler()
 def handle_text(message):
     
-    if str.lower(message.text) == "бот прием":
+    if str.lower(message.text) in ("бот прием", "бот приём"):
         answer = bot_speach_examples.weather_string_generator()
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
