@@ -1,6 +1,7 @@
-destination: 'Леблядевку'
-destination_time: '19:00'
-seazon_start_day: 1
-seazon_start_mounth: 4
-seazon_start_yaer: 2019
-seazon_reason: 'сезона'
+destination: "\u0421\u0443\u0445\u043E\u0434\u0440\u043E\u0447\u044C\u0435"
+destination_time: '20:00'
+seazon_reason: "\u0421\u0435\u0437\u043E\u043D\u0430"
+seazon_start_day: '30'
+seazon_start_mounth: '5'
+seazon_start_yaer: '2020'
+wake_up_time: None

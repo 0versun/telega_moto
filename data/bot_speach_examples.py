@@ -190,3 +190,10 @@ def weather_string_generator():
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
     return weather_text_report
+
+def where_to_go():
+    dest = data_processor.data_read('destination')
+    date = data_processor.data_read('destination_time')
+    answer = (f'\nСегодня поедем в {dest}\nв <code>{date}</code>')
+
+    return answer

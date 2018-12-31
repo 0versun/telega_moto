@@ -21,3 +21,4 @@ def data_read(data_tag=None):
         return data[data_tag]
     else:
         print('Something went wrong')
+
