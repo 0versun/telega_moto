@@ -86,7 +86,13 @@ def handle_text(message):
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
 
-    elif str.lower(message.text) == "бот куда едем":
+    elif str.lower(message.text) in (
+            "бот, куда едем",
+            "бот,куда едем",
+            "бот ,куда едем",
+            "бот , куда едем",
+            "бот куда едем",
+    ):
         answer = bot_speach_examples.where_to_go()
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
