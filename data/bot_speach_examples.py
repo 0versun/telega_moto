@@ -135,8 +135,8 @@ def prognoz_advise():
         'обратитесь там к своему личному метеорологу на вашем любимом андроиде',
         'спрыгните с 30 этажа', 'погуглите гисметео', 'посмотрите в окно',
         'позвоните в метеослужбу', 'послушайте радио', 'втыкните в телек',
-        'скачайте приложение',
-        'оближите палец и поднимите его выше головы', 'посмотрите на градусник'
+        'скачайте приложение', 'оближите палец и поднимите его выше головы',
+        'посмотрите на градусник'
     ]
     return random.choice(word_list)
 
@@ -145,7 +145,10 @@ def weather_string_generator():
 
     cyborg_hello = welcome_bot()
     welcome = welcome_word_processor()
-    seazon_start = timing_processor.return_dif(data_processor.data_read('seazon_start_yaer'), data_processor.data_read('seazon_start_mounth'), data_processor.data_read('seazon_start_day'))
+    seazon_start = timing_processor.return_dif(
+        data_processor.data_read('seazon_start_yaer'),
+        data_processor.data_read('seazon_start_mounth'),
+        data_processor.data_read('seazon_start_day'))
     current_temp = int(thread_runner.system.bot_retreave_current_temperature())
     condition = weather_conditions_processor(
         thread_runner.system.bot_retreave_current_temperature())

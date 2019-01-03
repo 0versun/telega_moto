@@ -1,5 +1,5 @@
 1. try to run install.sh with root access, is applicable only for ubuntu/debian systems in its not help go to step 2
 2. Install Python3 and pip manager for python3
 3. run shell inside root folder and run command-> python3 -m pip -r requirements.dat
-4. after all libs install rin from command line -> python3 -m run.python3
+4. after all libs install rin from command line -> python3 -m run.py
 5. should be run console interface with bot
