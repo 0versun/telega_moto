@@ -78,17 +78,19 @@ def set_task(message):
 
 @bot.message_handler()
 def handle_text(message):
-    
-    if str.lower(message.text) in ("бот прием", "бот приём"):
+
+    if str.lower(message.text) in ("бот прием", "бот приём", "бот, прием",
+                                   "ботприем", "ботприём", "бот,прием",
+                                   "бот ,прием", "бот , прием"):
         answer = bot_speach_examples.weather_string_generator()
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
-    
+
     elif str.lower(message.text) == "бот куда едем":
         answer = bot_speach_examples.where_to_go()
         console_output(message, answer)
         bot.reply_to(message, answer, parse_mode='HTML')
-    
+
     else:
         console_output(message, 'Message From Chat')
 
