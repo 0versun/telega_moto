@@ -1,6 +1,8 @@
 import _thread
 import schedule
 import time
+import main_bot
+from data import data_processor
 from data import weather_retreaver
 
 system = weather_retreaver.weather_formatter()
@@ -12,6 +14,17 @@ def renew_weather_info():
     system.update_weather_data = 'Start'
 
 
+def send_time_message():
+    main_bot.send_scheduled_message(data_processor.return_stored_chat_id())
+    return print('TIME MASCHINE STARTED')
+
+
+def check_time():
+    time = data_processor.data_read(data_tag='wake_up_time')    
+    schedule.every().day.at(time).do(send_time_message)
+
+
+schedule.every(1).minute.do(check_time)
 schedule.every(1).hour.do(renew_weather_info)
 
 

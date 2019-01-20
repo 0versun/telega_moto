@@ -4,7 +4,6 @@ from data import timing_processor
 from data import thread_runner
 from data import data_processor
 
-
 def weather_conditions_processor(temperature):
 
     conditions = (
@@ -54,7 +53,7 @@ def welcome_word_processor():
         'органические биомассы', 'тупые хомосапиенсы', 'cмертное мясо',
         'земные животные', 'инкубаторы для микробов', 'глупые приматы',
         'наборы хромосом', 'подвижные углеводы', 'скучные костяные наборы',
-        'одноразовые людишки'
+        'одноразовые людишки','приматики'
     ]
 
     return random.choice(word_list)
@@ -141,40 +140,51 @@ def prognoz_advise():
     return random.choice(word_list)
 
 
-def weather_string_generator():
+def moto_telo():
+    telesa_list = [
+        'мото тело', 'мото братуня', 'мото приматик', 'мото сеструня',
+        'манекен', 'мото маркетолог', 'мото барыга', 'тру байкер',
+        'не тру байкер', 'алкомотоблогер', 'мото алконавт', 'мото турист',
+        'мистре я все знаю', 'мото эксперт'
+    ]
 
-    cyborg_hello = welcome_bot()
-    welcome = welcome_word_processor()
-    seazon_start = timing_processor.return_dif(
-        data_processor.data_read('seazon_start_yaer'),
-        data_processor.data_read('seazon_start_mounth'),
-        data_processor.data_read('seazon_start_day'))
-    current_temp = int(thread_runner.system.bot_retreave_current_temperature())
-    condition = weather_conditions_processor(
-        thread_runner.system.bot_retreave_current_temperature())
-    condition2 = str.lower(
-        thread_runner.system.bot_retreave_current_condition())
-    feature_condition = str.lower(
-        thread_runner.system.bot_retreave_maybe_conditions())
-    wind = weather_wind_speed_processor(
-        thread_runner.system.bot_retreave_current_wind_speed())
-    wind_speed = int(thread_runner.system.bot_retreave_current_wind_speed())
-    humidity = thread_runner.system.bot_retreave_current_humidity()
-    equip = moto_equip_generator()
-    moto_feel = int(
-        thread_runner.system.bot_retreave_current_feels_like_temperature())
-    sun_s = thread_runner.system.bot_retreave_sunrise()
-    sun_e = thread_runner.system.bot_retreave_sunset()
-    future_temp = int(thread_runner.system.bot_min_temperature_retreaver())
-    future_condition = weather_conditions_processor(
-        int(thread_runner.system.bot_min_temperature_retreaver()))
-    future_weather = str.lower(
-        thread_runner.system.bot_retreave_maybe_conditions())
-    moon = thread_runner.system.bot_retreave_moonrise()
-    destination_time = data_processor.data_read('destination_time')
-    destination = data_processor.data_read('destination')
-    seazon = data_processor.data_read('seazon_reason')
-    advice = prognoz_advise()
+    return random.choice(telesa_list)
+
+
+cyborg_hello = welcome_bot()
+welcome = welcome_word_processor()
+seazon_start = timing_processor.return_dif(
+    data_processor.data_read('seazon_start_yaer'),
+    data_processor.data_read('seazon_start_mounth'),
+    data_processor.data_read('seazon_start_day'))
+current_temp = int(thread_runner.system.bot_retreave_current_temperature())
+condition = weather_conditions_processor(
+    thread_runner.system.bot_retreave_current_temperature())
+condition2 = str.lower(thread_runner.system.bot_retreave_current_condition())
+feature_condition = str.lower(
+    thread_runner.system.bot_retreave_maybe_conditions())
+wind = weather_wind_speed_processor(
+    thread_runner.system.bot_retreave_current_wind_speed())
+wind_speed = int(thread_runner.system.bot_retreave_current_wind_speed())
+humidity = thread_runner.system.bot_retreave_current_humidity()
+equip = moto_equip_generator()
+moto_feel = int(
+    thread_runner.system.bot_retreave_current_feels_like_temperature())
+sun_s = thread_runner.system.bot_retreave_sunrise()
+sun_e = thread_runner.system.bot_retreave_sunset()
+future_temp = int(thread_runner.system.bot_min_temperature_retreaver())
+future_condition = weather_conditions_processor(
+    int(thread_runner.system.bot_min_temperature_retreaver()))
+future_weather = str.lower(
+    thread_runner.system.bot_retreave_maybe_conditions())
+moon = thread_runner.system.bot_retreave_moonrise()
+destination_time = data_processor.data_read('destination_time')
+destination = data_processor.data_read('destination')
+seazon = data_processor.data_read('seazon_reason')
+advice = prognoz_advise()
+
+
+def weather_string_generator_long():
 
     weather_text_report = \
     f'<b>{cyborg_hello} - {welcome}, до начала {seazon} осталось {seazon_start} дней.</b>\
@@ -192,6 +202,32 @@ def weather_string_generator():
     \nИ еще если бы мы поехали сегодня в <b>{destination}</b> в <code>{destination_time}</code> то было бы {future_temp} градусов, что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в <code>{moon}</code>.\
     \n\
     \nДля более точного прогноза, {advice} или как вы там привыкли это делать? \
+    \n\
+    \n<b>{end_word_processor()}, но вы держитесь!</b>'
+
+    return weather_text_report
+
+
+def weather_string_generator_short():
+
+    weather_text_report = \
+    f'<b>{cyborg_hello} - {welcome}, до начала {seazon} осталось {seazon_start} дней.</b>\
+    \n \
+    \n<b>Расклад по погоде:</b>\
+    \nТемпература: <b>{current_temp}</b> градусов,\
+    \nТипа {condition2},\
+    \nВетер - {wind}, примерно {wind_speed} км\ч.\
+    \nВлажность где-то {humidity}%.\
+    \n \
+    \nЕсли бы {moto_telo()} ехал {equip}, то ощущал бы это как {moto_feel} градусов. \
+    \n \
+    \nВосход солнца в <code>{sun_s}</code> \
+    \nЗакат в <code>{sun_e}</code> не проебите! \
+    \nЛуна покажется в <code>{moon}</code> \
+    \n\
+    \n<b>Во второй половине:</b> \
+    \n{future_temp} градусов, типа {future_condition} \
+    \nА так же возможно {future_weather}.\
     \n\
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
