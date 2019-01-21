@@ -19,12 +19,12 @@ def send_time_message():
     return print('TIME MASCHINE STARTED')
 
 
-def check_time():
-    time = data_processor.data_read(data_tag='wake_up_time')    
-    schedule.every().day.at(time).do(send_time_message)
+#def check_time():
+#    time = data_processor.data_read(data_tag='wake_up_time')    
+#    schedule.every().day.at(time).do(send_time_message)
 
-
-schedule.every(1).minute.do(check_time)
+schedule.every().day.at('08:00').do(send_time_message)
+#schedule.every(1).minute.do(check_time)
 schedule.every(1).hour.do(renew_weather_info)
 
 
