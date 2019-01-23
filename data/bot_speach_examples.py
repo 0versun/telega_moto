@@ -38,8 +38,9 @@ def weather_conditions_processor(temperature):
 def welcome_bot():
 
     word_list = [
-        'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Как там', 'Опа',
-        'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете', 'Отакое', 'Ку'
+        'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Ну чо', 'Как там',
+        'Опа', 'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете', 'Отакое',
+        'Ку'
     ]
 
     return random.choice(word_list)
@@ -151,57 +152,98 @@ def moto_telo():
     return random.choice(telesa_list)
 
 
-cyborg_hello = welcome_bot()
-welcome = welcome_word_processor()
-seazon_start = timing_processor.return_dif(
-    data_processor.data_read('seazon_start_yaer'),
-    data_processor.data_read('seazon_start_mounth'),
-    data_processor.data_read('seazon_start_day'))
-current_temp = int(thread_runner.system.bot_retreave_current_temperature())
-condition = weather_conditions_processor(
-    thread_runner.system.bot_retreave_current_temperature())
-condition2 = str.lower(thread_runner.system.bot_retreave_current_condition())
-feature_condition = str.lower(
-    thread_runner.system.bot_retreave_maybe_conditions())
-wind = weather_wind_speed_processor(
-    thread_runner.system.bot_retreave_current_wind_speed())
-wind_speed = int(thread_runner.system.bot_retreave_current_wind_speed())
-humidity = thread_runner.system.bot_retreave_current_humidity()
-equip = moto_equip_generator()
-moto_feel = int(
-    thread_runner.system.bot_retreave_current_feels_like_temperature())
-sun_s = thread_runner.system.bot_retreave_sunrise()
-sun_e = thread_runner.system.bot_retreave_sunset()
-future_temp = int(thread_runner.system.bot_min_temperature_retreaver())
-future_condition = weather_conditions_processor(
-    int(thread_runner.system.bot_min_temperature_retreaver()))
-future_weather = str.lower(
-    thread_runner.system.bot_retreave_maybe_conditions())
-moon = thread_runner.system.bot_retreave_moonrise()
-destination_time = data_processor.data_read('destination_time')
-destination = data_processor.data_read('destination')
-seazon = data_processor.data_read('seazon_reason')
-advice = prognoz_advise()
+class v:
+
+    def cyborg_hello(self):
+        return welcome_bot()
+
+    def welcome(self):
+        return welcome_word_processor()
+
+    def seazon_start(self):
+        return timing_processor.return_dif(
+            data_processor.data_read('seazon_start_yaer'),
+            data_processor.data_read('seazon_start_mounth'),
+            data_processor.data_read('seazon_start_day'))
+
+    def current_temp(self):
+        return int(thread_runner.system.bot_retreave_current_temperature())
+
+    def condition(self):
+        return weather_conditions_processor(
+               thread_runner.system.bot_retreave_current_temperature())
+
+    def condition2(self):
+        return str.lower(thread_runner.system.bot_retreave_current_condition())
+
+    def feature_condition(self):
+        return str.lower(thread_runner.system.bot_retreave_maybe_conditions())
+
+    def wind(self):
+        return weather_wind_speed_processor(
+               thread_runner.system.bot_retreave_current_wind_speed())
+
+    def wind_speed(self):
+        return int(thread_runner.system.bot_retreave_current_wind_speed())
+ 
+    def humidity(self):
+        return thread_runner.system.bot_retreave_current_humidity()
+
+    def equip(self):
+        return moto_equip_generator()
+
+    def moto_feel(self):
+        return int(thread_runner.system.bot_retreave_current_feels_like_temperature())
+
+    def sun_s(self):
+        return thread_runner.system.bot_retreave_sunrise()
+
+    def sun_e(self):
+        return thread_runner.system.bot_retreave_sunset()
+
+    def future_temp(self):
+        return int(thread_runner.system.bot_min_temperature_retreaver())
+
+    def future_condition(self):
+        return weather_conditions_processor(int(thread_runner.system.bot_min_temperature_retreaver()))
+
+    def future_weather(self):
+        return str.lower(thread_runner.system.bot_retreave_maybe_conditions())
+
+    def moon(self):
+        return thread_runner.system.bot_retreave_moonrise()
+
+    def destination_time(self):
+        return data_processor.data_read('destination_time')
+
+    def destination(self):
+        return data_processor.data_read('destination')
+
+    def seazon(self):
+        return data_processor.data_read('seazon_reason')
+
+    def advice(self):
+        return prognoz_advise()
 
 
 def weather_string_generator_long():
 
     weather_text_report = \
-    f'<b>{cyborg_hello} - {welcome}, до начала {seazon} осталось {seazon_start} дней.</b>\
+    f'<b>{v().cyborg_hello() } - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()} дней.</b>\
     \n \
-    \nПогода в Киеве примерно {current_temp} градусов, {condition} и {condition2}, а еще может быть и еще будет {feature_condition}. \
+    \nПогода в Киеве примерно {v().current_temp()} градусов, {v().condition()} и {v().condition2()}, а еще может быть и еще будет {v().feature_condition()}. \
     \n \
-    \nВетер - {wind}, вроде бы как {wind_speed} км\ч.\
+    \nВетер - {v().wind()}, вроде бы как {v().wind_speed()} км\ч.\
     \n \
-    \nВлажность где-то {humidity}%.\
+    \nВлажность где-то {v().humidity()}%.\
     \n \
-    \nЕсли бы мото братюня ехал {equip}, то ощущал бы это примерно как {moto_feel} градусов. \
+    \nЕсли бы мото братюня ехал {v().equip()}, то ощущал бы это примерно как {v().moto_feel()} градусов. \
     \n \
-    \nСолнце встало в <code>{sun_s}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{sun_e}</code> не проебите! \
+    \nСолнце встало в <code>{v().sun_s()}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{v().sun_e()}</code> не проебите! \
     \n\
-    \nИ еще если бы мы поехали сегодня в <b>{destination}</b> в <code>{destination_time}</code> то было бы {future_temp} градусов, что есть {future_condition}, а так же возможно {future_weather} и луна взошла бы в <code>{moon}</code>.\
+    \nИ еще если бы мы поехали сегодня в <b>{v().destination()}</b> в <code>{v().destination_time()}</code> то было бы {v().future_temp()} градусов, что есть {v().future_condition()}, а так же возможно {v().future_weather()} и луна взошла бы в <code>{v().moon()}</code>.\
     \n\
-    \nДля более точного прогноза, {advice} или как вы там привыкли это делать? \
+    \nДля более точного прогноза, {v().advice()} или как вы там привыкли это делать? \
     \n\
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 
@@ -211,23 +253,23 @@ def weather_string_generator_long():
 def weather_string_generator_short():
 
     weather_text_report = \
-    f'<b>{cyborg_hello} - {welcome}, до начала {seazon} осталось {seazon_start} дней.</b>\
+    f'<b>{v().cyborg_hello()} - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()} дней.</b>\
     \n \
     \n<b>Расклад по погоде:</b>\
-    \nТемпература: <b>{current_temp}</b> градусов,\
-    \nТипа {condition2},\
-    \nВетер - {wind}, примерно {wind_speed} км\ч.\
-    \nВлажность где-то {humidity}%.\
+    \nТемпература: <b>{v().current_temp()}</b> градусов,\
+    \nТипа {v().condition2()},\
+    \nВетер - {v().wind()}, примерно {v().wind_speed()} км\ч.\
+    \nВлажность где-то {v().humidity()}%.\
     \n \
-    \nЕсли бы {moto_telo()} ехал {equip}, то ощущал бы это как {moto_feel} градусов. \
+    \nЕсли бы {moto_telo()} ехал {v().equip()}, то ощущал бы это как {v().moto_feel()} градусов. \
     \n \
-    \nВосход солнца в <code>{sun_s}</code> \
-    \nЗакат в <code>{sun_e}</code> не проебите! \
-    \nЛуна покажется в <code>{moon}</code> \
+    \nВосход солнца в <code>{v().sun_s()}</code> \
+    \nЗакат в <code>{v().sun_e()}</code> не проебите! \
+    \nЛуна покажется в <code>{v().moon()}</code> \
     \n\
     \n<b>Во второй половине:</b> \
-    \n{future_temp} градусов, типа {future_condition} \
-    \nА так же возможно {future_weather}.\
+    \n{v().future_temp()} градусов, типа {v().future_condition()} \
+    \nА так же возможно {v().future_weather()}.\
     \n\
     \n<b>{end_word_processor()}, но вы держитесь!</b>'
 

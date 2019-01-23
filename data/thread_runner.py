@@ -1,4 +1,4 @@
-import _thread
+import threading
 import schedule
 import time
 import main_bot
@@ -18,29 +18,15 @@ def send_time_message():
     main_bot.send_scheduled_message(data_processor.return_stored_chat_id())
     return print('TIME MASCHINE STARTED')
 
+def run_threaded(job_func):
+    job_thread = threading.Thread(target=job_func)
+    job_thread.start()
 
-#def check_time():
-#    time = data_processor.data_read(data_tag='wake_up_time')    
-#    schedule.every().day.at(time).do(send_time_message)
+def runschedule():
 
-schedule.every().day.at('08:00').do(send_time_message)
-#schedule.every(1).minute.do(check_time)
-schedule.every(1).hour.do(renew_weather_info)
+        schedule.every().day.at('08:00').do(run_threaded, send_time_message)
+        schedule.every(1).hour.do(run_threaded, renew_weather_info)
+        while 1:
+                schedule.run_pending()
+                time.sleep(1)
 
-
-def run_over():
-    while True:
-
-        # Checks whether a scheduled task
-        # is pending to run or not
-        schedule.run_pending()
-        time.sleep(1)
-
-
-try:
-    _thread.start_new_thread(run_over, ())
-except:
-    print('THREAD RUN error')
-    time.sleep(2)
-    flag = True
-    raise Exception()
