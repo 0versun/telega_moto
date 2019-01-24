@@ -19,8 +19,10 @@ def store_chat_id(message):
 def send_scheduled_message(ids):
     answer = bot_speach_examples.weather_string_generator_short()
     for items in ids:
-        bot.send_message(items, answer, parse_mode='HTML')
-
+        try:
+            bot.send_message(items, answer, parse_mode='HTML')
+        except:
+            print('Yakas ebanina')
 
 def console_output(message, answer):
     print(40 * '✅ ')
