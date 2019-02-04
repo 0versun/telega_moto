@@ -2,6 +2,7 @@ import telebot
 import yaml
 from data import data_processor
 from data import bot_speach_examples
+from data import trip_storage
 from datetime import datetime
 
 config = yaml.load(open('./data/settings/credentials.yaml'))
@@ -28,8 +29,8 @@ def console_output(message, answer):
     print(40 * '✅ ')
     print(datetime.now(), '\n')
     print(
-        f'➡  Message from {message.from_user.first_name} {message.from_user.last_name} user_id = {str(message.from_user.id)} chat_id = {str(message.chat.id)} \n➡  Message = {message.text}'
-    )
+        f'➡  Message from  {message.from_user.username} aka {message.from_user.first_name} {message.from_user.last_name} user_id = {str(message.from_user.id)} chat_id = {str(message.chat.id)} \n➡  Message = {message.text}'
+    ) 
     print('\n', answer)
     print(40 * '✅ ')
 
@@ -51,14 +52,14 @@ def send_short_message(message):
 @bot.message_handler(commands=['long'])
 def send_long_message(message):
     answer = bot_speach_examples.weather_string_generator_long()
-    bot.reply_to(message, answer, parse_mode='HTML') 
+    bot.reply_to(message, answer, parse_mode='HTML')
 
 
 @bot.message_handler(commands=['set_wake_up'])
 def set_wake_up_time(message):
     sent = bot.send_message(message.chat.id, 'Когда просыпаться ?\n\
     укажи время в 24 форматном виде\n\
-    например 10:40\n')
+    например 10:40\n'                     )
     bot.register_next_step_handler(sent, set_weak_up)
 
 
@@ -75,15 +76,21 @@ def send_welcome(message):
 
 
 def set_destination(message):
-    data_processor.data_write(data_tag='destination', value=message.text)
-    sent = bot.send_message(message.chat.id,
-                            'а теперь время в цифрах, например 19:00')
+    user1 = {message.from_user.first_name: trip_storage.trip_attributes.append(message.text)}
+    trip_storage.trip_storage.update(user1)
+    sent = bot.send_message(message.chat.id,'а теперь время в цифрах, либо время суток')
     bot.register_next_step_handler(sent, set_time)
 
 
+
 def set_time(message):
-    data_processor.data_write(data_tag='destination_time', value=message.text)
-    bot.send_message(message.chat.id, 'Спасибо')
+    user1 = {message.from_user.first_name: trip_storage.trip_attributes.append(message.text)}
+    trip_storage.trip_storage.update(user1)
+    user_name = {message.from_user.first_name: trip_storage.trip_attributes.append(message.from_user.id)}
+    trip_storage.trip_storage.update(user_name)
+    bot.send_message(message.chat.id, 'Отлично, принято!')
+    trip_storage.trip_storage[message.from_user.first_name] = list(trip_storage.trip_attributes)
+    trip_storage.trip_attributes.clear()
 
 
 @bot.message_handler(commands=['set_task'])
@@ -136,9 +143,17 @@ def handle_text(message):
             "бот , куда едем",
             "бот куда едем",
     ):
-        answer = bot_speach_examples.where_to_go()
-        console_output(message, answer)
-        bot.reply_to(message, answer, parse_mode='HTML')
+        # answer = bot_speach_examples.where_to_go()
+        if len(trip_storage.trip_storage) == 0:
+            answer = 'Пока никто никуда не едет'
+            bot.send_message(message.chat.id, answer, parse_mode='HTML' )
+            console_output(message, answer)
+
+        else:
+            for keys in trip_storage.trip_storage:
+                answer = f'<a href="tg://user?id={trip_storage.trip_storage.get(keys)[2]}">{keys}</a> пердлагает ехать в {trip_storage.trip_storage.get(keys)[0]} ориентировочно {trip_storage.trip_storage.get(keys)[1]}'
+                bot.send_message(message.chat.id, answer, parse_mode='HTML')
+                console_output(message, answer)
 
     else:
         console_output(message, 'Message From Chat')
