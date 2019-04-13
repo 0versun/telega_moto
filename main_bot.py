@@ -143,7 +143,7 @@ def handle_text(message):
             "бот , куда едем",
             "бот куда едем",
     ):
-        # answer = bot_speach_examples.where_to_go()
+
         if len(trip_storage.trip_storage) == 0:
             answer = 'Пока никто никуда не едет'
             bot.send_message(message.chat.id, answer, parse_mode='HTML' )

@@ -26,6 +26,7 @@ def weather_forecast_retreaver(url=weather_url_constructor(weather_params['wethe
     weather_json_response = requests.get(url)
     return weather_json_response.text
 
+
 class weather_formatter:
     def __init__(self):
         self._weather_now = None

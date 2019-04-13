@@ -30,7 +30,7 @@ def reset_trips():
 def runschedule():
 
     schedule.every().day.at('08:00').do(run_threaded, send_time_message)
-    schedule.every(1).hour.do(run_threaded, renew_weather_info)
+    schedule.every(30).minutes.do(run_threaded, renew_weather_info)
     schedule.every().day.at('00:00').do(run_threaded, reset_trips)
     while 1:
             schedule.run_pending()

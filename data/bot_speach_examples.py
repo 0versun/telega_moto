@@ -3,6 +3,8 @@ import random
 from data import timing_processor
 from data import thread_runner
 from data import data_processor
+from data import trip_storage
+
 
 def weather_conditions_processor(temperature):
 
@@ -40,7 +42,7 @@ def welcome_bot():
     word_list = [
         'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Ну чо', 'Как там',
         'Опа', 'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете', 'Отакое',
-        'Ку'
+        'Ку', 'Шотам'
     ]
 
     return random.choice(word_list)
@@ -54,7 +56,8 @@ def welcome_word_processor():
         'органические биомассы', 'тупые хомосапиенсы', 'cмертное мясо',
         'земные животные', 'инкубаторы для микробов', 'глупые приматы',
         'наборы хромосом', 'подвижные углеводы', 'скучные костяные наборы',
-        'одноразовые людишки','приматики'
+        'одноразовые людишки','приматики', 'угрюмые человечишки', 'мясные фаршики',
+        'либители мото-некромантии'
     ]
 
     return random.choice(word_list)
@@ -63,16 +66,23 @@ def welcome_word_processor():
 def end_word_processor():
 
     end_word = [
-        'Сезон не начался', 'Сезон не открылся',
-        'В нормальных странах уже катают', 'Нового мотика вам не видать',
+        # 'Сезон не начался', 'Сезон не открылся',
+        # 'В нормальных странах уже катают', 
+        'На новый мотик не хватает денег',
         'На новый экип вам не хватит', 'LS2 шлем который вы заслужили',
-        'На новые мотоботы не насобирать', 'Бенз дорогой',
+        'На новые мотоботы нет бабла', 'Бенз дорогой',
         'Новую резину вам невидать', 'Пинлок дороже шлема',
         'Масло все вытекло', 'Лампочки все перегорели',
         'Вы в LS2 и у вас все хорошо', 'Идёт дождь и нет дождивика',
         'Рулевая раскрутилась', 'Резина лысая', 'Цепь провисла',
         'Звезды стёрлись', 'В перчах дырки', 'Вилка пробивается',
-        'Сальники потекли', 'Сцепление сгорело', 'Тросики порвались'
+        'Сальники потекли', 'Сцепление сгорело', 'Тросики порвались',
+        'Двигатель стуканул','Дикси погнутые','Лапка тормоза погнулась',
+        'Лапка переключения отвалилась', 'Визор потертый', 'Мотоботы завонялись',
+        'Мотокуртка уже вонючая', 'Кожаный экип потрескался', 'Руль погнулся',
+        'Электрику закоротило','Рама треснула','Пластик полопался', 'Аккум сдох',
+        'Приборка не работает', 'Карбы забились', 'Некромопед подушатался', 'Бак течет',
+        'Проводка погорела', 'Коробка сдохла', 'Вкладыши провернуло'
     ]
     return random.choice(end_word)
 
@@ -84,7 +94,7 @@ def moto_equip_generator():
         'в одних труселях и перчатках', 'в шлепках и футболке',
         'в кожаном прикиде', 'в мотокомбезе как тру гонщег',
         'в лыжном костюме на голое тело', 'в стрингах из кожи дермонтина',
-        'в одной бандане и перчах', 'в туристической флиске'
+        'в одной бандане и перчах', 'в туристической флиске', 'в мотострингах'
     ]
     return random.choice(moto_equip)
 
@@ -146,10 +156,17 @@ def moto_telo():
         'мото тело', 'мото братуня', 'мото приматик', 'мото сеструня',
         'манекен', 'мото маркетолог', 'мото барыга', 'тру байкер',
         'не тру байкер', 'алкомотоблогер', 'мото алконавт', 'мото турист',
-        'мистре я все знаю', 'мото эксперт'
+        'мистер я все знаю', 'мото эксперт', 'эксперт широкого профиля',
+        'стрит сракер','мото покатун','эндуровоин','ракетчик', 'мото школоло'
     ]
 
     return random.choice(telesa_list)
+
+def pep_talk():
+    talk = ['но вы не унывайте', 'но вы не сдавайтесь', 'но вы терпите', 
+            'но вы не горюйте','но вы держитесь','но вы не расслаблятесь']
+    
+    return random.choice(talk)
 
 
 class v:
@@ -161,10 +178,7 @@ class v:
         return welcome_word_processor()
 
     def seazon_start(self):
-        return timing_processor.return_dif(
-            data_processor.data_read('seazon_start_yaer'),
-            data_processor.data_read('seazon_start_mounth'),
-            data_processor.data_read('seazon_start_day'))
+        return f"дней {timing_processor.return_dif(data_processor.data_read('seazon_start_yaer'), data_processor.data_read('seazon_start_mounth'), data_processor.data_read('seazon_start_day'))}"
 
     def current_temp(self):
         return int(thread_runner.system.bot_retreave_current_temperature())
@@ -211,7 +225,11 @@ class v:
         return str.lower(thread_runner.system.bot_retreave_maybe_conditions())
 
     def moon(self):
-        return thread_runner.system.bot_retreave_moonrise()
+        moon_rise = thread_runner.system.bot_retreave_moonrise()
+        if moon_rise == 'no moonrise':
+            return 'но не сегодня'
+        else:
+            return thread_runner.system.bot_retreave_moonrise()
 
     def destination_time(self):
         return data_processor.data_read('destination_time')
@@ -229,7 +247,7 @@ class v:
 def weather_string_generator_long():
 
     weather_text_report = \
-    f'<b>{v().cyborg_hello() } - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()} дней.</b>\
+    f'<b>{v().cyborg_hello() } - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()}.</b>\
     \n \
     \nПогода в Киеве примерно {v().current_temp()} градусов, {v().condition()} и {v().condition2()}, а еще может быть и еще будет {v().feature_condition()}. \
     \n \
@@ -253,7 +271,7 @@ def weather_string_generator_long():
 def weather_string_generator_short():
 
     weather_text_report = \
-    f'<b>{v().cyborg_hello()} - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()} дней.</b>\
+    f'<b>{v().cyborg_hello()} - {v().welcome()}, до начала {v().seazon()} осталось {v().seazon_start()}.</b>\
     \n \
     \n<b>Расклад по погоде:</b>\
     \nТемпература: <b>{v().current_temp()}</b> градусов,\
@@ -271,13 +289,6 @@ def weather_string_generator_short():
     \n{v().future_temp()} градусов, типа {v().future_condition()} \
     \nА так же возможно {v().future_weather()}.\
     \n\
-    \n<b>{end_word_processor()}, но вы держитесь!</b>'
+    \n<b>{end_word_processor()}, {pep_talk()} !</b>'
 
     return weather_text_report
-
-def where_to_go():
-    dest = data_processor.data_read('destination')
-    date = data_processor.data_read('destination_time')
-    answer = (f'\nСегодня поедем в {dest}\nв <code>{date}</code>')
-
-    return answer

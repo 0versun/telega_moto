@@ -30,6 +30,7 @@ def data_compressor(data):
             with open('./data/settings/chat_id.dat', 'a') as write_data:
                 write_data.write(str(data)+'\n')
 
+
 def return_stored_chat_id():
     with open('./data/settings/chat_id.dat', 'r') as read_file:
         chat_ids = read_file.read().splitlines()
