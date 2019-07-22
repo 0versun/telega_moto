@@ -46,6 +46,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['short'])
 def send_short_message(message):
+    bot.send_chat_action(message.chat.id, action='typing')
     answer = bot_speach_examples.weather_string_generator_short()
     bot.reply_to(message, answer, parse_mode='HTML')
 
@@ -57,7 +58,7 @@ def send_long_message(message):
 
 @bot.message_handler(commands=['radar'])
 def send_radar_message(message):
-    bot.reply_to(message, 'Подожди чуток, сейчас попробую' )
+    bot.send_chat_action(message.chat.id, action='upload_photo')
     answer = weather_retreaver.weather_animation_retreaver()
     bot.reply_to(message, answer, parse_mode='HTML')
 
@@ -65,7 +66,7 @@ def send_radar_message(message):
 def set_wake_up_time(message):
     sent = bot.send_message(message.chat.id, 'Когда просыпаться ?\n\
     укажи время в 24 форматном виде\n\
-    например 10:40\n'                     )
+    например 10:40\n')
     bot.register_next_step_handler(sent, set_weak_up)
 
 
