@@ -293,6 +293,6 @@ def weather_string_generator_short():
     \nА так же возможно {v().future_weather()}.\
     \n\
     \n<b>{end_word_processor()}, {pep_talk()} !</b> \
-    \n{str(v().gif())}'
+    \n<a href="{str(v().gif())}">окрыть анимацию радара</a>'
 
     return weather_text_report

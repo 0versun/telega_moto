@@ -59,7 +59,8 @@ def send_long_message(message):
 @bot.message_handler(commands=['radar'])
 def send_radar_message(message):
     bot.send_chat_action(message.chat.id, action='upload_photo')
-    answer = weather_retreaver.weather_animation_retreaver()
+    link = weather_retreaver.weather_animation_retreaver()
+    answer = f'<a href="{link}">окрыть оригинал</a>'
     bot.reply_to(message, answer, parse_mode='HTML')
 
 @bot.message_handler(commands=['set_wake_up'])
