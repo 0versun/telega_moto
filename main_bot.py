@@ -3,6 +3,7 @@ import yaml
 from data import data_processor
 from data import bot_speach_examples
 from data import trip_storage
+from data import weather_retreaver
 from datetime import datetime
 
 config = yaml.load(open('./data/settings/credentials.yaml'))
@@ -54,6 +55,11 @@ def send_long_message(message):
     answer = bot_speach_examples.weather_string_generator_long()
     bot.reply_to(message, answer, parse_mode='HTML')
 
+@bot.message_handler(commands=['radar'])
+def send_radar_message(message):
+    bot.reply_to(message, 'Подожди чуток, сейчас попробую' )
+    answer = weather_retreaver.weather_animation_retreaver()
+    bot.reply_to(message, answer, parse_mode='HTML')
 
 @bot.message_handler(commands=['set_wake_up'])
 def set_wake_up_time(message):

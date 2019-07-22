@@ -7,7 +7,6 @@ weather_params = yaml.load(open('./data/settings/credentials.yaml'))
 
 
 def weather_url_constructor(params):
-    # weather_params = yaml.load(open('credentials.yaml'))
     url_constructor = (weather_params['weather_url'] + params +
                        weather_params['weather_key_position'] +
                        weather_params['weather_api_token'] +
@@ -25,6 +24,22 @@ def weather_forecast_retreaver(url=weather_url_constructor(weather_params['wethe
     print('WARNING - RETREAVER for all day weather called')
     weather_json_response = requests.get(url)
     return weather_json_response.text
+
+def weather_animation_retreaver(headers= weather_params['imgur_authorisation'], 
+                                base_url= weather_params['imgur_base_url'], 
+                                data=weather_params['weather_gif_base_url']):
+    print('Try to retreave GIF animation')
+
+    try:
+        response = requests.request('POST', base_url, headers=headers, data=data)
+        print('GIF Animation Data received')
+    except:
+        print('Some Yebanina Is Happens', response.text)
+
+    weather_id = json.loads(response.text)["data"]["id"]
+    weather_animation = f'https://i.imgur.com/{weather_id}.gif'
+    print('Generate link ', weather_animation)
+    return weather_animation
 
 
 class weather_formatter:

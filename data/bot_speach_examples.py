@@ -3,7 +3,8 @@ import random
 from data import timing_processor
 from data import thread_runner
 from data import data_processor
-from data import trip_storage
+from data import weather_retreaver 
+# from data import trip_storage
 
 
 def weather_conditions_processor(temperature):
@@ -242,7 +243,9 @@ class v:
 
     def advice(self):
         return prognoz_advise()
-
+    
+    def gif(self):
+        return weather_retreaver.weather_animation_retreaver()
 
 def weather_string_generator_long():
 
@@ -289,6 +292,7 @@ def weather_string_generator_short():
     \n{v().future_temp()} градусов, типа {v().future_condition()} \
     \nА так же возможно {v().future_weather()}.\
     \n\
-    \n<b>{end_word_processor()}, {pep_talk()} !</b>'
+    \n<b>{end_word_processor()}, {pep_talk()} !</b> \
+    \n {str(v().gif())}'
 
     return weather_text_report
