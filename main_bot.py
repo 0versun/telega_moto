@@ -26,6 +26,23 @@ def send_scheduled_message(ids):
         except:
             print('Yakas ebanina')
 
+def send_scheduled_animation(ids):
+    answer = bot_speach_examples.weather_animation_generator()
+    for items in ids:
+        try:
+            bot.send_message(items, answer, parse_mode='HTML')
+        except:
+            print('Yakas HUITA')
+
+
+def send_scheduled_weather_animation(ids):
+    answer = bot_speach_examples.weather_string_generator_short()
+    for items in ids:
+        try:
+            bot.send_message(items, answer, parse_mode='HTML')
+        except:
+            print('Yakas ebanina')    
+
 def console_output(message, answer):
     print(40 * '✅ ')
     print(datetime.now(), '\n')

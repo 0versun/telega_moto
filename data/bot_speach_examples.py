@@ -296,3 +296,13 @@ def weather_string_generator_short():
     \n<a href="{str(v().gif())}">окрыть анимацию радара</a>'
 
     return weather_text_report
+
+def weather_animation_generator():
+    weather_string_animation = \
+    f'\n {welcome_bot()} {moto_telo()} \
+    \nТемпература: {v().condition()} ({v().current_temp()})\
+    \nВетер - {v().wind()} {v().wind_speed()} км\ч.\
+    \nВлажность {v().humidity()}%.\
+    \n<a href="{str(v().gif())}">окрыть анимацию радара</a>'
+
+    return weather_string_animation
