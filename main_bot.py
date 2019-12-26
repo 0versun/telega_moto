@@ -94,18 +94,17 @@ def set_weak_up(message):
                             f"Понял, буду просыпаться каждый день в {data_processor.data_read(data_tag='wake_up_time')}")
 
 
-@bot.message_handler(commands=['set_destination'])
-def send_welcome(message):
-    sent = bot.send_message(message.chat.id, 'Куда поедем ?')
-    bot.register_next_step_handler(sent, set_destination)
+#@bot.message_handler(commands=['set_destination'])
+#def send_welcome(message):
+#    sent = bot.send_message(message.chat.id, 'Куда поедем ?')
+#    bot.register_next_step_handler(sent, set_destination)
 
 
-def set_destination(message):
-    user1 = {message.from_user.first_name: trip_storage.trip_attributes.append(message.text)}
-    trip_storage.trip_storage.update(user1)
-    sent = bot.send_message(message.chat.id,'а теперь время в цифрах, либо время суток')
-    bot.register_next_step_handler(sent, set_time)
-
+#def set_destination(message):
+#    user1 = {message.from_user.first_name: trip_storage.trip_attributes.append(message.text)}
+#    trip_storage.trip_storage.update(user1)
+#    sent = bot.send_message(message.chat.id,'а теперь время в цифрах, либо время суток')
+#    bot.register_next_step_handler(sent, set_time)
 
 
 def set_time(message):

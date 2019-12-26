@@ -1,6 +1,7 @@
 import json
 import yaml
 import requests
+import datetime
 
 
 weather_params = yaml.load(open('./data/settings/credentials.yaml'))
@@ -11,8 +12,8 @@ def weather_url_constructor(params):
                        weather_params['weather_key_position'] +
                        weather_params['weather_api_token'] +
                        weather_params['city'])
+    print('URL IS',url_constructor)
     return url_constructor
-
 
 def weather_current_retreaver(url=weather_url_constructor(weather_params['weather_now_prefix'])):
     print('WARNING - RETREAVER for current weather called')
@@ -77,42 +78,41 @@ class weather_formatter:
     
     def bot_retreave_current_temperature(self):
         print('CALL TEMP')
-        print(self.load_current_weather()["current"]['temp_c'])
-        return self.load_current_weather()["current"]['temp_c']
+        print(self.load_current_weather())
+        print(self.load_current_weather()["main"]['temp'])
+        return self.load_current_weather()["main"]['temp']
 
     def bot_retreave_current_condition(self):
-        print(self.load_current_weather()["current"]["condition"]['text'])
-        return self.load_current_weather()["current"]["condition"]['text']
+        print(self.load_current_weather()["weather"][0]["description"])
+        return self.load_current_weather()["weather"][0]["description"]
 
     def bot_retreave_current_wind_speed(self):
-        print(self.load_current_weather()["current"]["wind_kph"])
-        return self.load_current_weather()["current"]["wind_kph"]
+        print(self.load_current_weather()["wind"]["speed"])
+        return self.load_current_weather()["wind"]["speed"]
     
     def bot_retreave_current_humidity(self):
-        print(self.load_current_weather()["current"]["humidity"])
-        return self.load_current_weather()["current"]["humidity"]        
+        print(self.load_current_weather()["main"]["humidity"])
+        return self.load_current_weather()["main"]["humidity"]      
     
     def bot_retreave_current_feels_like_temperature(self):
-        print(self.load_current_weather()["current"]["feelslike_c"])
-        return self.load_current_weather()["current"]["feelslike_c"]
-
-    def bot_retreave_sunrise(self):
-        print(self.load_forecast()['forecast']['forecastday'][0]['astro']['sunrise'])
-        return self.load_forecast()['forecast']['forecastday'][0]['astro']['sunrise']
+        print(self.load_current_weather()["main"]["feels_like"])
+        return self.load_current_weather()["main"]["feels_like"]
     
+    def bot_retreave_sunrise(self):
+        print(self.load_current_weather()["sys"]["sunrise"])
+        sunrise = datetime.datetime.fromtimestamp(self.load_current_weather()["sys"]["sunrise"]).strftime('%H:%M:%S')
+        return sunrise
+
     def bot_retreave_sunset(self):
-        print(self.load_forecast()['forecast']['forecastday'][0]['astro']['sunset'])
-        return self.load_forecast()['forecast']['forecastday'][0]['astro']['sunset']
+        print(self.load_current_weather()["sys"]["sunset"])
+        sunset = datetime.datetime.fromtimestamp(self.load_current_weather()["sys"]["sunset"]).strftime('%H:%M:%S')
+        return sunset
     
     def bot_retreave_maybe_conditions(self):
-        print(self.load_forecast()['forecast']['forecastday'][0]['day']['condition']['text'])
-        return self.load_forecast()['forecast']['forecastday'][0]['day']['condition']['text']    
+        # +3
+        print(self.load_forecast()['list'][3]['weather'][0]['description'])
+        return self.load_forecast()['list'][3]['weather'][0]['description']
 
     def bot_min_temperature_retreaver(self):
-        print(self.load_forecast()['forecast']['forecastday'][0]['day']['mintemp_c'])
-        return self.load_forecast()['forecast']['forecastday'][0]['day']['mintemp_c']
-    
-    def bot_retreave_moonrise(self):
-        print(self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise'])
-        return self.load_forecast()['forecast']['forecastday'][0]['astro']['moonrise']
-
+        print(self.load_forecast()['list'][3]["main"]["temp_min"])
+        return self.load_forecast()['list'][3]["main"]["temp_min"]

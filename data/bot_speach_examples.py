@@ -43,7 +43,7 @@ def welcome_bot():
     word_list = [
         'Эй', 'Привет', 'Как дела', 'Что нового', 'Ну что', 'Ну чо', 'Как там',
         'Опа', 'Как же так', 'Эгегей', 'Как оно', 'Что чувствуете', 'Отакое',
-        'Ку', 'Шотам'
+        'Ку', 'Шотам','Агов', 'Ололо'
     ]
 
     return random.choice(word_list)
@@ -58,7 +58,7 @@ def welcome_word_processor():
         'земные животные', 'инкубаторы для микробов', 'глупые приматы',
         'наборы хромосом', 'подвижные углеводы', 'скучные костяные наборы',
         'одноразовые людишки','приматики', 'угрюмые человечишки', 'мясные фаршики',
-        'либители мото-некромантии'
+        'либители мото-некромантии','любители реальных дальняков в Сухолучье'
     ]
 
     return random.choice(word_list)
@@ -67,8 +67,8 @@ def welcome_word_processor():
 def end_word_processor():
 
     end_word = [
-        # 'Сезон не начался', 'Сезон не открылся',
-        # 'В нормальных странах уже катают', 
+        'Сезон не начался', 'Сезон не открылся',
+        'В нормальных странах уже катают', 
         'На новый мотик не хватает денег',
         'На новый экип вам не хватит', 'LS2 шлем который вы заслужили',
         'На новые мотоботы нет бабла', 'Бенз дорогой',
@@ -91,6 +91,7 @@ def end_word_processor():
 def moto_equip_generator():
     moto_equip = [
         'в маркетинговом экипе', 'в экипе из военторга', 'в шортах и маечке',
+        'в трушном софтшелве на всю жизнь'
         'в мотошмотках из православного gortex',
         'в одних труселях и перчатках', 'в шлепках и футболке',
         'в кожаном прикиде', 'в мотокомбезе как тру гонщег',
@@ -165,7 +166,7 @@ def moto_telo():
 
 def pep_talk():
     talk = ['но вы не унывайте', 'но вы не сдавайтесь', 'но вы терпите', 
-            'но вы не горюйте','но вы держитесь','но вы не расслаблятесь']
+            'но вы не горюйте','но вы держитесь','но вы не расслаблятесь','но вы не вешайте нос']
     
     return random.choice(talk)
 
@@ -225,12 +226,12 @@ class v:
     def future_weather(self):
         return str.lower(thread_runner.system.bot_retreave_maybe_conditions())
 
-    def moon(self):
-        moon_rise = thread_runner.system.bot_retreave_moonrise()
-        if moon_rise == 'no moonrise':
-            return 'но не сегодня'
-        else:
-            return thread_runner.system.bot_retreave_moonrise()
+    # def moon(self):
+    #     moon_rise = thread_runner.system.bot_retreave_moonrise()
+    #     if moon_rise == 'no moonrise':
+    #         return 'но не сегодня'
+    #     else:
+    #         return thread_runner.system.bot_retreave_moonrise()
 
     def destination_time(self):
         return data_processor.data_read('destination_time')
@@ -262,7 +263,7 @@ def weather_string_generator_long():
     \n \
     \nСолнце встало в <code>{v().sun_s()}</code> но вы конечно же проебали этот момент, как всегда впрочем, хоть закат в <code>{v().sun_e()}</code> не проебите! \
     \n\
-    \nИ еще если бы мы поехали сегодня в <b>{v().destination()}</b> в <code>{v().destination_time()}</code> то было бы {v().future_temp()} градусов, что есть {v().future_condition()}, а так же возможно {v().future_weather()} и луна взошла бы в <code>{v().moon()}</code>.\
+    \nИ еще если бы мы поехали сегодня в <b>{v().destination()}</b> в <code>{v().destination_time()}</code> то было бы {v().future_temp()} градусов, что есть {v().future_condition()}, а так же возможно {v().future_weather()}.\
     \n\
     \nДля более точного прогноза, {v().advice()} или как вы там привыкли это делать? \
     \n\
@@ -286,7 +287,6 @@ def weather_string_generator_short():
     \n \
     \nВосход солнца в <code>{v().sun_s()}</code> \
     \nЗакат в <code>{v().sun_e()}</code> не проебите! \
-    \nЛуна покажется в <code>{v().moon()}</code> \
     \n\
     \n<b>Во второй половине:</b> \
     \n{v().future_temp()} градусов, типа {v().future_condition()} \

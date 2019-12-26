@@ -19,29 +19,32 @@ def send_time_message():
     main_bot.send_scheduled_message(data_processor.return_stored_chat_id())
     return print('TIME MASCHINE STARTED')
 
+
 def send_time_animation():
     main_bot.send_scheduled_animation(data_processor.return_stored_chat_id())
-    return print('TIME Animation STARTED')    
+    return print('TIME Animation STARTED')
+
 
 def run_threaded(job_func):
     job_thread = threading.Thread(target=job_func)
     job_thread.start()
 
+
 def reset_trips():
     trip_storage.trip_storage.clear()
+
 
 def runschedule():
 
     schedule.every().day.at('07:30').do(run_threaded, send_time_message)
     schedule.every().day.at('9:00').do(run_threaded, send_time_animation)
-    schedule.every().day.at('12:00').do(run_threaded, send_time_animation)
-    schedule.every().day.at('15:00').do(run_threaded, send_time_animation)
+    #schedule.every().day.at('12:00').do(run_threaded, send_time_animation)
+    #schedule.every().day.at('15:00').do(run_threaded, send_time_animation)
     schedule.every().day.at('17:00').do(run_threaded, send_time_animation)
     schedule.every().day.at('20:00').do(run_threaded, send_time_animation)
 
-    schedule.every(30).minutes.do(run_threaded, renew_weather_info)
+    schedule.every(15).minutes.do(run_threaded, renew_weather_info)
     schedule.every().day.at('00:00').do(run_threaded, reset_trips)
     while 1:
             schedule.run_pending()
             time.sleep(1)
-
