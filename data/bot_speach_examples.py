@@ -3,7 +3,7 @@ import random
 from data import timing_processor
 from data import thread_runner
 from data import data_processor
-from data import weather_retreaver 
+from data import weather_retreaver
 # from data import trip_storage
 
 
@@ -15,7 +15,7 @@ def weather_conditions_processor(temperature):
         'холодно так впоряде', 'холодно шопиздец', 'холодно так шо уши вянут',
         'это уже и не холодно даже, а смерть от обморожения',
         'температура непонятно, можно жить или нет, походу как на марсе')
-
+    temperature = int(temperature)
     if temperature in range(30, 41):
         return conditions[0]
     elif temperature in range(20, 31):
