@@ -26,6 +26,14 @@ def send_scheduled_message(ids):
         except:
             print('Yakas ebanina')
 
+def send_bot_picture(ids, file_id):
+    for items in ids:
+        try:
+            bot.send_photo(items, photo=file_id)
+            print (items,'Отправила')
+        except:
+            print('Фоточка по каким-то причинам не отправилась')
+
 def send_scheduled_animation(ids):
     answer = bot_speach_examples.weather_animation_generator()
     for items in ids:
@@ -87,11 +95,25 @@ def set_wake_up_time(message):
     например 10:40\n')
     bot.register_next_step_handler(sent, set_weak_up)
 
+@bot.message_handler(commands=['set_pic'])
+def set_pic(message):
+    sent = bot.send_message(message.chat.id, 'скинь мне мою секси фотку и я ее запощу')
+    bot.register_next_step_handler(sent, set_file_id)
+    # print(message.photo.file_id)
+
+# @bot.message_handler(commands=['set_file'])
+def set_file_id(message):
+    print('Пробую отослать файл')
+    file_id = message.photo[0].file_id
+    chat_ids = data_processor.return_stored_chat_id()
+    send_bot_picture(chat_ids,file_id)
+    # bot.send_photo(message.chat.id, photo=file_id)
+
 
 def set_weak_up(message):
     data_processor.data_write(data_tag='wake_up_time', value=message.text)
     bot.send_message(message.chat.id,
-                            f"Понял, буду просыпаться каждый день в {data_processor.data_read(data_tag='wake_up_time')}")
+                            f"Поняла, буду просыпаться каждый день в {data_processor.data_read(data_tag='wake_up_time')}")
 
 
 #@bot.message_handler(commands=['set_destination'])
@@ -112,7 +134,7 @@ def set_time(message):
     trip_storage.trip_storage.update(user1)
     user_name = {message.from_user.first_name: trip_storage.trip_attributes.append(message.from_user.id)}
     trip_storage.trip_storage.update(user_name)
-    bot.send_message(message.chat.id, 'Отлично, принято!')
+    bot.send_message(message.chat.id, 'Отлично, поняла!')
     trip_storage.trip_storage[message.from_user.first_name] = list(trip_storage.trip_attributes)
     trip_storage.trip_attributes.clear()
 
