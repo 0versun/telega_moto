@@ -109,6 +109,19 @@ def set_file_id(message):
     send_bot_picture(chat_ids,file_id)
     # bot.send_photo(message.chat.id, photo=file_id)
 
+@bot.message_handler(commands=['say_something'])
+def say_something(message):
+    sent = bot.send_message(message.chat.id, 'Скажи что-то')
+    bot.register_next_step_handler(sent, send_text)
+
+def send_text(message):
+    answer = message.text
+    chat_ids = data_processor.return_stored_chat_id()
+    for items in chat_ids:
+        try:
+            bot.send_message(items, answer, parse_mode='HTML')
+        except: print('SMTHNGWRNG')
+    # bot.send_message(chat_ids, message.text)
 
 def set_weak_up(message):
     data_processor.data_write(data_tag='wake_up_time', value=message.text)
