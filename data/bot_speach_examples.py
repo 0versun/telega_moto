@@ -111,8 +111,9 @@ def weather_wind_speed_processor(wind_power):
         'наваливает так что походу нам всем пиздец',
         'говорит что нам таки пиздец'
     ]
-    wind_power = int(wind_power)
-    print('RECEIVE', wind_power)
+    # Convert M/S to KM/H 
+    wind_power = int(wind_power)*3.6
+    print('RECEIVE WInd Power ', wind_power)
 
     if wind_power in range(0, 2):
         return conditions[0]
