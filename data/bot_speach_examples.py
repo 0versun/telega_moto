@@ -139,7 +139,6 @@ def weather_wind_speed_processor(wind_power):
         return conditions[10]
     else:
         print('RECEIVE', wind_power)
-
         return conditions[11]
 
 
@@ -202,7 +201,7 @@ class v:
                thread_runner.system.bot_retreave_current_wind_speed())
 
     def wind_speed(self):
-        return int(thread_runner.system.bot_retreave_current_wind_speed())
+        return int(thread_runner.system.bot_retreave_current_wind_speed()*3.6)
  
     def humidity(self):
         return thread_runner.system.bot_retreave_current_humidity()
