@@ -76,27 +76,39 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['short'])
 def send_short_message(message):
-    try:
-        bot.send_chat_action(message.chat.id, action='typing')
-        answer = bot_speach_examples.weather_string_generator_short()
-        bot.reply_to(message, answer, parse_mode='HTML')
-    except:print('Something wrong')
+    if message.chat.id < 0:
+       answer=(f"Пишите в личку {bot_speach_examples.welcome_word_processor()}.")
+       bot.reply_to(message, answer, parse_mode='HTML')
+    else:
+        try:
+            bot.send_chat_action(message.chat.id, action='typing')
+            answer = bot_speach_examples.weather_string_generator_short()
+            bot.reply_to(message, answer, parse_mode='HTML')
+        except:print('Something wrong')
 
 @bot.message_handler(commands=['long'])
 def send_long_message(message):
-    try:
-        answer = bot_speach_examples.weather_string_generator_long()
-        bot.reply_to(message, answer, parse_mode='HTML')
-    except:print('Something wrong')
+    if message.chat.id < 0:
+       answer=(f"Пишите в личку {bot_speach_examples.welcome_word_processor()}.")
+       bot.reply_to(message, answer, parse_mode='HTML')    
+    else:
+        try:
+            answer = bot_speach_examples.weather_string_generator_long()
+            bot.reply_to(message, answer, parse_mode='HTML')
+        except:print('Something wrong')
 
 @bot.message_handler(commands=['radar'])
 def send_radar_message(message):
-    try:
-        bot.send_chat_action(message.chat.id, action='upload_photo')
-        link = weather_retreaver.weather_animation_retreaver()
-        answer = f'<a href="{link}">окрыть оригинал</a>'
-        bot.reply_to(message, answer, parse_mode='HTML')
-    except:print('Something wrong')
+   if message.chat.id < 0:
+       answer=(f"Пишите в личку {bot_speach_examples.welcome_word_processor()}.")
+       bot.reply_to(message, answer, parse_mode='HTML')
+   else:    
+        try:
+            bot.send_chat_action(message.chat.id, action='upload_photo')
+            link = weather_retreaver.weather_animation_retreaver()
+            answer = f'<a href="{link}">окрыть оригинал</a>'
+            bot.reply_to(message, answer, parse_mode='HTML')
+        except:print('Something wrong')
 
 @bot.message_handler(commands=['set_wake_up'])
 def set_wake_up_time(message):
