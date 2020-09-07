@@ -36,15 +36,11 @@ def reset_trips():
 
 def runschedule():
 
-    schedule.every().day.at('07:30').do(run_threaded, send_time_message)
-    schedule.every().day.at('9:00').do(run_threaded, send_time_animation)
-    #schedule.every().day.at('12:00').do(run_threaded, send_time_animation)
-    #schedule.every().day.at('15:00').do(run_threaded, send_time_animation)
-    schedule.every().day.at('17:00').do(run_threaded, send_time_animation)
-    schedule.every().day.at('20:00').do(run_threaded, send_time_animation)
-
+    schedule.every().day.at("08:30").do(run_threaded, send_time_message)
+    schedule.every().day.at("16:30").do(run_threaded, send_time_animation)
+    schedule.every().day.at("20:00").do(run_threaded, send_time_animation)
     schedule.every(15).minutes.do(run_threaded, renew_weather_info)
-    schedule.every().day.at('00:00').do(run_threaded, reset_trips)
+    schedule.every().day.at("00:00").do(run_threaded, reset_trips)
     while 1:
             schedule.run_pending()
             time.sleep(1)
